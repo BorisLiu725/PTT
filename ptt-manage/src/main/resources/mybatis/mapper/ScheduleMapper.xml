@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ptt.pttmanager.dao.ScheduleDao">
+
+    <!--<resultMap id="scheduleResultMapper" type="com.ptt.pttmanager.utils.ScheduleResult">-->
+        <!--<result column="schedule_id" property="schedule.scheduleId"/>-->
+        <!--<result column="movie_id" property="schedule.movieId"/>-->
+        <!--<result column="studio_id" property="schedule.studioId"/>-->
+        <!--<result column="seat_num" property="schedule.seatNum"/>-->
+        <!--<result column="new_price" property="schedule.newPrice"/>-->
+        <!--<result column="old_price" property="schedule.oldPrice"/>-->
+        <!--<result column="start_time" property="schedule.startTime"/>-->
+        <!--<result column="end_time" property="schedule.endTime"/>-->
+        <!--<result column="studio_name" property="studioName"/>-->
+    <!--</resultMap>-->
+
+    <resultMap id="scheduleMapper" type="com.ptt.pttmanager.bean.Schedule">
+        <id column="schedule_id" property="scheduleId"/>
+        <result column="movie_id" property="movieId"/>
+        <result column="studio_id" property="studioId"/>
+        <result column="seat_num" property="seatNum"/>
+        <result column="new_price" property="newPrice"/>
+        <result column="old_price" property="oldPrice"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <association property="movie" column="movie_id" autoMapping="true" javaType="com.ptt.pttmanager.bean.Movie" select="com.ptt.pttmanager.dao.MovieDao.getMovie"/>
+        <association property="studio" column="studio_id" autoMapping="true" javaType="com.ptt.pttmanager.bean.Studio" select="com.ptt.pttmanager.dao.StudioDao.queryByStudioId"/>
+        <collection property="tickets" column="schedule_id" select="com.ptt.pttmanager.dao.TicketDao.queryByScheduleId" autoMapping="true" ofType="com.ptt.pttmanager.bean.Ticket"/>
+
+    </resultMap>
+
+
+
+    <resultMap id="resultScheduleMapper" type="com.ptt.pttmanager.bean.ResultSchedule">
+        <result column="schedule_id" property="schedule.scheduleId"/>
+        <result column="movie_id" property="schedule.movieId"/>
+        <result column="studio_id" property="schedule.studioId"/>
+        <result column="seat_num" property="schedule.seatNum"/>
+        <result column="new_price" property="schedule.newPrice"/>
+        <result column="old_price" property="schedule.oldPrice"/>
+        <result column="start_time" property="schedule.startTime"/>
+        <result column="end_time" property="schedule.endTime"/>
+        <result column="rows_count" property="studio.rowsCount"/>
+        <result column="cols_count" property="studio.colsCount"/>
+        <result column="studio_name" property="studio.studioName"/>
+        <result column="st_name" property="language"/>
+    </resultMap>
+
+    <resultMap id="schedule2Mapper" type="com.ptt.pttmanager.bean.Schedule">
+        <id column="schedule_id" property="scheduleId"/>
+        <result column="movie_id" property="movieId"/>
+        <result column="studio_id" property="studioId"/>
+        <result column="seat_num" property="seatNum"/>
+        <result column="new_price" property="newPrice"/>
+        <result column="old_price" property="oldPrice"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <association property="movie" column="movie_id" autoMapping="true" javaType="com.ptt.pttmanager.bean.Movie" select="com.ptt.pttmanager.dao.MovieDao.getMovie"/>
+        <association property="studio" column="studio_id" autoMapping="true" javaType="com.ptt.pttmanager.bean.Studio" select="com.ptt.pttmanager.dao.StudioDao.queryByStudioId"/>
+    </resultMap>
+
+
+
+
+
+
+
+
+   <!--<select id="queryAllScheduleByDate" resultType="com.ptt.pttmanager.utils.ScheduleResult" resultMap="scheduleResultMapper">-->
+         <!--SELECT sche.*,stu.studio_name-->
+         <!--FROM `schedule` sche-->
+         <!--LEFT JOIN  studio stu-->
+         <!--ON sche.studio_id = stu.studio_id-->
+         <!--where sche.start_time &gt;= #{startTime} and sche.end_Time &lt; #{endTime}-->
+   <!--</select>-->
+
+    <select id="queryAll" resultType="com.ptt.pttmanager.bean.Schedule" resultMap="scheduleMapper">
+        select * from `schedule`
+    </select>
+
+    <select id="queryAllScheduleByDate" resultType="com.ptt.pttmanager.bean.ResultSchedule" resultMap="resultScheduleMapper">
+         SELECT sch.*,stu.rows_count,stu.cols_count,stu.studio_name,sty.st_name FROM `schedule` sch
+         LEFT JOIN `studio` stu
+         ON sch.studio_id = stu.studio_id
+         LEFT JOIN `studio_type` sty
+         ON sty.st_id = stu.studio_id
+         where sch.start_time &gt;= #{startTime} and sch.end_Time &lt; #{endTime}
+   </select>
+
+    <select id="queryAllScheduleByDateAndMovieId" resultType="com.ptt.pttmanager.bean.ResultSchedule" resultMap="resultScheduleMapper">
+         SELECT sch.*,stu.rows_count,stu.cols_count,stu.studio_name,sty.st_name FROM `schedule` sch
+         LEFT JOIN `studio` stu
+         ON sch.studio_id = stu.studio_id
+         LEFT JOIN `studio_type` sty
+         ON sty.st_id = stu.studio_id
+         where sch.start_time &gt;= #{startTime} and sch.end_Time &lt; #{endTime} and sch.movie_id = #{movieId}
+   </select>
+
+
+    <select id="queryScheduleId" resultType="com.ptt.pttmanager.bean.Schedule" resultMap="scheduleMapper" parameterType="Long">
+         SELECT * FROM `schedule` WHERE schedule_id = #{scheduleId};
+    </select>
+
+
+    <insert id="save" parameterType="com.ptt.pttmanager.bean.Schedule" useGeneratedKeys="true" keyColumn="schedule_id" keyProperty="scheduleId">
+        insert into `schedule` values (null,#{movieId},#{studioId},#{seatNum},#{newPrice},#{oldPrice},#{startTime},#{endTime})
+    </insert>
+
+    <!--前端查询的数据封装-->
+    <!--<select id="" resultType="com.ptt.pttmanager.bean.ResultSchedule" resultMap="resultScheduleMapper">-->
+        <!--SELECT sch.*,stu.rows_count,stu.cols_count,stu.studio_name,sty.st_name FROM `schedule` sch-->
+        <!--LEFT JOIN `studio` stu-->
+        <!--ON sch.studio_id = stu.studio_id-->
+        <!--LEFT JOIN `studio_type` sty-->
+        <!--ON sty.st_id = stu.studio_id;-->
+    <!--</select>-->
+
+
+
+    <select id="queryScheduleId2" resultType="com.ptt.pttmanager.bean.Schedule" resultMap="schedule2Mapper" parameterType="Long">
+         SELECT * FROM `schedule` WHERE schedule_id = #{scheduleId};
+    </select>
+
+
+</mapper>
+
+

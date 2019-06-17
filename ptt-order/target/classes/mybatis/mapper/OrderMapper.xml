@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ptt.pttorder.dao.OrderDao">
+
+    <resultMap id="orderMapper" type="com.ptt.pttorder.bean.Order">
+        <id column="order_id" property="orderId"/>
+        <collection property="orderItems" javaType="list" ofType="com.ptt.pttorder.bean.OrderItem" column="order_id" select="com.ptt.pttorder.dao.OrderItemDao.queryOrderItemsByOrderId"/>
+    </resultMap>
+
+    <insert id="saveOrder" parameterType="com.ptt.pttorder.bean.Order">
+        insert into `order` values (#{orderId},#{userId},#{status},#{totalPrice},#{startTime},#{updateTime});
+        insert into `order_item` values
+        <foreach collection="orderItems"  separator="," item="item">
+            (null,#{orderId},#{item.ticketId},#{item.movieName},#{item.movieImg},#{item.language},#{item.movieTimes},#{item.row},#{item.column})
+        </foreach>
+        ;
+     </insert>
+
+    <update id="updateOrderByOrderId">
+        update `order` set `status` = #{status} where order_id = #{orderId}
+    </update>
+
+    <select id="queryOrderByUserId" resultType="com.ptt.pttorder.bean.Order" resultMap="orderMapper">
+        select * from `order` where  user_id = #{userId}
+    </select>
+
+    <!--&lt;!&ndash;查询订单封装成Ticket对象&ndash;&gt;-->
+    <!--<select id="queryByOrderWithTicket" parameterType="String" resultMap="ticketMapper">-->
+      <!--SELECT o.order_id,s.language,s.new_price,m.movie_name,m.movie_images,s.new_price,s.start_time ,stu.studio_name,stu.studio_type-->
+      <!--FROM `order` o, `movie` m,`schedule` s,`studio` stu-->
+      <!--WHERE o.order_id = #{0} and o.movie_id = m.id AND o.schedule_id = s.schedule_id AND stu.studio_id = o.studio_id;-->
+    <!--</select>-->
+
+    <delete id="deleteOrderByUserIdAndOrderId">
+        DELETE  FROM `order` WHERE `order_id` = #{orderId} and user_id = #{userId}
+    </delete>
+
+</mapper>

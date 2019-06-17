@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ptt.pttmanager.dao.MovieDao">
+
+
+
+    <resultMap id="movieMapper" type="com.ptt.pttmanager.bean.Movie">
+        <id column="id" property="id"/>
+        <result column="movie_name" property="movieName"/>
+        <result column="movie_direct" property="movieDirect"/>
+        <result column="movie_performer" property="moviePerformer"/>
+        <result column="movie_type" property="movieType"/>
+        <result column="movie_area" property="movieArea"/>
+        <result column="movie_time" property="movieTime"/>
+        <result column="movie_desc" property="movieDesc"/>
+        <result column="movie_images" property="movieImages"/>
+        <result column="start_time" property="startTime"/>
+        <result column="status" property="status"/>
+        <result column="star" property="star"/>
+        <result column="language" property="language"/>
+        <result column="sales_volume" property="salesVolume"/>
+    </resultMap>
+
+
+    <!--select查找方法-->
+    <select id="getAll" resultType="com.ptt.pttmanager.bean.Movie" >
+        select * from movie
+    </select>
+
+    <select id="getMovie" resultType="com.ptt.pttmanager.bean.Movie" parameterType="Long" resultMap="movieMapper">
+        select * from movie where id = #{id}
+    </select>
+
+    <!--insert插入方法-->
+    <insert id="add" parameterType="com.ptt.pttmanager.bean.Movie">
+        insert into movie
+        values (#{movieName},#{movieName},#{movieDirect},#{moviePerformer},#{movieType})
+    </insert>
+
+
+    <select id="queryMovieOrderBySource"  resultType="com.ptt.pttmanager.bean.Movie">
+        SELECT * FROM  movie where `status`=1  ORDER BY star DESC
+    </select>
+
+    <select id="queryMovieBySalesVolume"  resultType="com.ptt.pttmanager.bean.Movie">
+        SELECT * FROM  movie where `status`=1  ORDER BY sales_volume DESC
+    </select>
+
+    <select id="salesStatistics" resultType="Long">
+         SELECT COUNT(*) FROM `ticket` t
+         LEFT JOIN `schedule` sch
+         ON t.schedule_id = sch.schedule_id
+         LEFT JOIN  `movie` m
+         ON m.id = sch.movie_id
+         WHERE t.status = 3
+    </select>
+
+    <update id="updateSalesVolumeByMovieId">
+        UPDATE `movie` SET  sales_volume = #{count} WHERE id = #{movieId}
+    </update>
+
+
+
+</mapper>

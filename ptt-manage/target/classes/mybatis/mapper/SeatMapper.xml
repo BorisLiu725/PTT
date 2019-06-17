@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ptt.pttmanager.dao.SeatDao">
+
+    <insert id="saveSeats" parameterType="java.util.List">
+          insert into `seat` values
+          <foreach collection="list" item="seat" separator=",">
+              (null ,#{seat.studioId},#{seat.row},#{seat.column},#{seat.status})
+          </foreach>
+    </insert>
+
+
+    <!--<select id="queryAllSeatsByScheduleIdAndStudioId" resultType="com.ptt.pttmanager.bean.Seat">-->
+        <!--SELECT * FROM `seat` WHERE  schedule_id = #{scheduleId} and studio_id = #{studioId};-->
+    <!--</select>-->
+    <select id="queryAllSeatsByStudioId" parameterType="Long" resultType="com.ptt.pttmanager.bean.Seat">
+        SELECT * FROM `seat` WHERE studio_id = #{studioId}
+    </select>
+
+    <select id="querySeatById" parameterType="java.lang.Long" resultType="com.ptt.pttmanager.bean.Seat">
+        SELECT * FROM `seat` WHERE seat_id = #{seatId}
+    </select>
+
+
+
+    <update id="updateSeats">
+       UPDATE `seat` SET `status` = #{status} WHERE seat_id IN
+       <foreach collection="ids" item="id" open="(" close=")" separator=",">
+           #{id}
+       </foreach>
+    </update>
+
+
+</mapper>
+
+

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ptt.pttmanager.dao.StudioDao">
+
+    <resultMap id="studioMapper" type="com.ptt.pttmanager.bean.Studio">
+        <id column="studio_id" property="studioId"/>
+        <result column="studio_name" property="studioName"/>
+        <result column="studio_type" property="studioType"/>
+        <result column="rows_count" property="rowsCount"/>
+        <result column="cols_count" property="colsCount"/>
+        <collection property="seats" column="studio_id" select="com.ptt.pttmanager.dao.SeatDao.queryAllSeatsByStudioId" javaType="java.util.List" ofType="com.ptt.pttmanager.bean.Seat" autoMapping="true"/>
+    </resultMap>
+
+
+
+    <select id="queryById" parameterType="java.lang.Long" resultMap="studioMapper">
+        select * from `studio` where studio_id = #{studioId}
+    </select>
+
+    <select id="queryAllWithAllSeats" resultType="com.ptt.pttmanager.bean.Studio" resultMap="studioMapper">
+        select * from `studio`
+    </select>
+
+    <select id="queryByStudioId" parameterType="java.lang.Long" resultType="com.ptt.pttmanager.bean.Studio">
+        select * from `studio` where studio_id = #{studioId}
+    </select>
+
+
+
+</mapper>

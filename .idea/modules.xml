@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ptt-manage/ptt-manage.iml" filepath="$PROJECT_DIR$/ptt-manage/ptt-manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ptt-parent/ptt-parent.iml" filepath="$PROJECT_DIR$/ptt-parent/ptt-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ptt-search/ptt-search.iml" filepath="$PROJECT_DIR$/ptt-search/ptt-search.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ptt-sso/ptt-sso.iml" filepath="$PROJECT_DIR$/ptt-sso/ptt-sso.iml" />
+    </modules>
+  </component>
+</project>

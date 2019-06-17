@@ -1,0 +1,76 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ptt.pttmanager.dao.TicketDao">
+
+    <resultMap id="ticketMapper" type="com.ptt.pttmanager.bean.Ticket">
+        <id column="ticket_id" property="ticketId"/>
+        <result column="schedule_id" property="scheduleId"/>
+        <result column="seat_id" property="seatId"/>
+        <result column="price" property="price"/>
+        <result column="qr_code" property="qrCode"/>
+        <result column="buy_time" property="buyTime"/>
+        <result column="status" property="status"/>
+        <result column="version" property="version"/>
+        <association property="seat" column="seat_id" autoMapping="true" javaType="com.ptt.pttmanager.bean.Seat" select="com.ptt.pttmanager.dao.SeatDao.querySeatById"/>
+    </resultMap>
+
+    <resultMap id="ticketScheduleMapper" type="com.ptt.pttmanager.bean.Ticket">
+        <id column="ticket_id" property="ticketId"/>
+        <result column="schedule_id" property="scheduleId"/>
+        <result column="seat_id" property="seatId"/>
+        <result column="price" property="price"/>
+        <result column="qr_code" property="qrCode"/>
+        <result column="buy_time" property="buyTime"/>
+        <result column="status" property="status"/>
+        <result column="version" property="version"/>
+        <association property="schedule" column="schedule_id" autoMapping="true" javaType="com.ptt.pttmanager.bean.Schedule" select="com.ptt.pttmanager.dao.ScheduleDao.queryScheduleId2"/>
+    </resultMap>
+
+
+    <!--批量保存票的信息-->
+    <insert id="saveTickets" parameterType="java.util.List" useGeneratedKeys="true">
+        insert into `ticket` values
+        <foreach collection="list" item="ticket" separator=",">
+            ( #{ticket.ticketId},#{ticket.scheduleId},#{ticket.seatId},#{ticket.price},#{ticket.qrCode},#{ticket.buyTime},#{ticket.status},0)
+        </foreach>
+    </insert>
+
+    <select id="queryByScheduleId" parameterType="java.lang.Long" resultType="com.ptt.pttmanager.bean.Ticket" resultMap="ticketMapper">
+        SELECT * FROM `ticket` WHERE schedule_id = #{scheduleId}
+    </select>
+
+    <select id="queryTicketStateByIds"  parameterType="java.util.List" resultType="com.ptt.pttmanager.bean.Ticket">
+        SELECT * FROM `ticket` WHERE ticket_id IN
+        <foreach collection="list" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <!--<update id="updateTicketStatus" parameterType="java.util.Map">-->
+        <!--<foreach item="value" index="key" collection="ids" separator=";">-->
+            <!--update ticket set status=2,version = version+1  where  version=#{value} and ticket_id= #{key} and status=1-->
+        <!--</foreach>-->
+    <!--</update>-->
+
+    <update id="updateTicketStatusByTicketIdWithStatus3">
+          update ticket set status=3,version = version+1
+          where  version=#{version}
+          and ticket_id= #{id}
+          and status=1
+    </update>
+
+    <update id="updateTicketStatusByTicketId">
+          update ticket set status=#{status},version = version+1
+          where  ticket_id= #{id}
+    </update>
+
+
+    <select id="queryByTicketId"  resultType="com.ptt.pttmanager.bean.Ticket" resultMap="ticketScheduleMapper">
+        SELECT * FROM `ticket` WHERE ticket_id = #{id}
+    </select>
+
+
+
+
+</mapper>

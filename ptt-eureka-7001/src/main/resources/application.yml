@@ -1,0 +1,13 @@
+server:
+  port: 7001
+
+
+#配置eureka
+eureka:
+  instance:
+    hostname: eureka7001.ptt.com
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
