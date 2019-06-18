@@ -76,7 +76,7 @@ eureka:
     service-url:
       defaultZone: http://eureka7001.ptt.com:7001/eureka
   instance:
-    instance-id: ptt-manager-provider7001
+    instance-id: ptt-manager-provider7001-hystrix
     prefer-ip-address: true
 
 

@@ -1,0 +1,7 @@
+spring:
+  cloud:
+    config:
+      name: application
+      profile: dev
+      label: master
+      uri: http://config.ptt.com:7003 #本次服务启动后，先去找3344服务，通过SpringCloudConfig获取github上的配置

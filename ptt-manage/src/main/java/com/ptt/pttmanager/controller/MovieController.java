@@ -1,7 +1,7 @@
 package com.ptt.pttmanager.controller;
 
 import com.ptt.pttmanager.bean.Movie;
-import com.ptt.pttmanager.service.MovieService;
+import com.ptt.pttmanager.service.impl.MovieServiceImpl;
 import com.ptt.pttmanager.utils.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,14 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class MovieController {
 
     @Autowired
-    private MovieService movieService;
-
-
-
-
-
-
-
+    private MovieServiceImpl movieService;
 
 
     /**

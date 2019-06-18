@@ -24,13 +24,13 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-//    @Autowired
-//    private ManageClientService manageClientService;
-
     @Autowired
-    private RestTemplate restTemplate;
+    private ManageClientService manageClientService;
 
-    private static final String REST_URL_PREFIX = "http://PTT-MANAGER-PROVIDER";
+//    @Autowired
+//    private RestTemplate restTemplate;
+
+//    private static final String REST_URL_PREFIX = "http://PTT-MANAGER-PROVIDER";
 
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
@@ -60,12 +60,34 @@ public class OrderController {
         try{
             this.orderService.updateOrder(orderId,status);
             msg.put("status","200");
+
             return ResponseEntity.ok(msg);
         }catch (Exception e){
 
             e.printStackTrace();
         }
         msg.put("status","500");
+        return ResponseEntity.ok(msg);
+    }
+    /**
+     * 通过顶订单号和用户id修改订单状态
+     * 如果超时的话，将票的状态恢复为未售！4-交易关闭
+     * */
+    @PutMapping("/update/status/{userId}/{orderId}/{status}")
+    public ResponseEntity<Map<String,String>> updateOrderByUserId(@PathVariable ("userId")Long userId,@PathVariable ("orderId")String orderId, @PathVariable("status")Integer status){
+        Map<String,String> msg = new HashMap<>();
+        try{
+//            this.orderService.updateOrder(orderId,status);
+            Boolean bool = this.orderService.updateOrderByIdAndUserId(orderId, status, userId);
+            msg.put("status","200");
+            LOGGER.info("orderId"+orderId+"-->"+"userId"+userId+"-->status"+status +"成功吗？"+bool);
+            return ResponseEntity.ok(msg);
+        }catch (Exception e){
+            LOGGER.info(e.getMessage());
+            e.printStackTrace();
+        }
+        msg.put("status","500");
+        LOGGER.info("orderId"+orderId+"-->"+"userId"+userId+"-->status"+status +"500错误");
         return ResponseEntity.ok(msg);
     }
 
@@ -87,10 +109,14 @@ public class OrderController {
 //        return this.manageClientService.get();
 //    }
 
+    /**
+     * 测试微服务接口是否接通
+     * */
     @GetMapping(value = "/consumer/ticket/get")
     @ResponseBody
     public List<String> get(){
-        return restTemplate.getForObject(REST_URL_PREFIX+"/ticket/get",List.class);
+//        return restTemplate.getForObject(REST_URL_PREFIX+"/ticket/get",List.class);
+        return this.manageClientService.get();
     }
 
 //    @DeleteMapping("/delete/{orderId}")

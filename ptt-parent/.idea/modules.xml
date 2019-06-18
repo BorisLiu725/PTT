@@ -2,12 +2,17 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../ptt-config-client-7004/ptt-config-client-7004.iml" filepath="$PROJECT_DIR$/../ptt-config-client-7004/ptt-config-client-7004.iml" />
       <module fileurl="file://$PROJECT_DIR$/../ptt-eureka-7001/ptt-eureka-7001.iml" filepath="$PROJECT_DIR$/../ptt-eureka-7001/ptt-eureka-7001.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ptt-github-config-7003/ptt-github-config-7003.iml" filepath="$PROJECT_DIR$/../ptt-github-config-7003/ptt-github-config-7003.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ptt-hystrix-dashboard/ptt-hystrix-dashboard.iml" filepath="$PROJECT_DIR$/../ptt-hystrix-dashboard/ptt-hystrix-dashboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ptt-hystrix-dashboard-7005/ptt-hystrix-dashboard-7005.iml" filepath="$PROJECT_DIR$/../ptt-hystrix-dashboard-7005/ptt-hystrix-dashboard-7005.iml" />
       <module fileurl="file://$PROJECT_DIR$/../ptt-manage/ptt-manage.iml" filepath="$PROJECT_DIR$/../ptt-manage/ptt-manage.iml" />
       <module fileurl="file://$PROJECT_DIR$/../ptt-order/ptt-order.iml" filepath="$PROJECT_DIR$/../ptt-order/ptt-order.iml" />
       <module fileurl="file://$PROJECT_DIR$/ptt-parent.iml" filepath="$PROJECT_DIR$/ptt-parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/../ptt-search/ptt-search.iml" filepath="$PROJECT_DIR$/../ptt-search/ptt-search.iml" />
       <module fileurl="file://$PROJECT_DIR$/../ptt-sso/ptt-sso.iml" filepath="$PROJECT_DIR$/../ptt-sso/ptt-sso.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ptt-zuul-7002/ptt-zuul-7002.iml" filepath="$PROJECT_DIR$/../ptt-zuul-7002/ptt-zuul-7002.iml" />
     </modules>
   </component>
 </project>

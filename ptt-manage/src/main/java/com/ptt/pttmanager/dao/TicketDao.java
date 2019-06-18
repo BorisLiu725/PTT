@@ -22,6 +22,8 @@ public interface TicketDao {
 
     Integer updateTicketStatusByTicketIdWithStatus3(@Param("id") String id,@Param("version")Long version);
 
+    Integer updateTicketStatusByTicketIdWithStatus1(@Param("id") String id,@Param("version")Long version);
+
     Integer updateTicketStatusByTicketId(@Param("id") String id,@Param("status")Integer status);
 
     Ticket queryByTicketId(@Param("id")String id);

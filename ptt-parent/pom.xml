@@ -14,6 +14,10 @@
         <module>../ptt-search</module>
         <module>../ptt-order</module>
         <module>../ptt-eureka-7001</module>
+        <module>../ptt-zuul-7002</module>
+        <module>../ptt-github-config-7003</module>
+        <module>../ptt-config-client-7004</module>
+        <module>../ptt-hystrix-dashboard-7005</module>
     </modules>
 
 

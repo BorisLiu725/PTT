@@ -70,6 +70,12 @@ eureka:
     prefer-ip-address: true
 
 
+#服务降级
+feign:
+  hystrix:
+    enable: true
+
+
 # 配置点开服务的info信息
 info:
   app.name: ptt-order

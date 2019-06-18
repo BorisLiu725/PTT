@@ -1,6 +1,6 @@
 package com.ptt.pttmanager.controller;
 
-import com.ptt.pttmanager.service.PicService;
+import com.ptt.pttmanager.service.impl.PicService;
 import com.ptt.pttmanager.utils.FileUploadResult;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

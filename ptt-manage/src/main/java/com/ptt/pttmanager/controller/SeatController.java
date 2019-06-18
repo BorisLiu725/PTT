@@ -1,8 +1,6 @@
 package com.ptt.pttmanager.controller;
 
-import com.ptt.pttmanager.bean.Seat;
-import com.ptt.pttmanager.service.SeatService;
-import com.ptt.pttmanager.utils.PageResult;
+import com.ptt.pttmanager.service.impl.SeatService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
-import java.util.List;
 
 @Controller
 @RequestMapping("/seat")

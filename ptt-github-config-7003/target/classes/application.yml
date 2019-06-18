@@ -1,0 +1,14 @@
+server:
+  port: 7003
+
+spring:
+  application:
+    name: ptt-config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/WaterAndFreedom/ptt-config-repository.git
+          search-paths: config-repo
+          username:
+          password:

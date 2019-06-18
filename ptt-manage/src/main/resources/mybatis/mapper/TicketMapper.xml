@@ -60,6 +60,13 @@
           and status=1
     </update>
 
+    <update id="updateTicketStatusByTicketIdWithStatus1">
+          update ticket set status=1,version = version+1
+          where  version=#{version}
+          and ticket_id= #{id}
+          and status=3
+    </update>
+
     <update id="updateTicketStatusByTicketId">
           update ticket set status=#{status},version = version+1
           where  ticket_id= #{id}

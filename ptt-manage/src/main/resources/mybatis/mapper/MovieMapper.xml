@@ -24,6 +24,7 @@
     </resultMap>
 
 
+
     <!--select查找方法-->
     <select id="getAll" resultType="com.ptt.pttmanager.bean.Movie" >
         select * from movie
@@ -33,12 +34,9 @@
         select * from movie where id = #{id}
     </select>
 
-    <!--insert插入方法-->
-    <insert id="add" parameterType="com.ptt.pttmanager.bean.Movie">
-        insert into movie
-        values (#{movieName},#{movieName},#{movieDirect},#{moviePerformer},#{movieType})
-    </insert>
-
+    <select id="queryMoviesByStatusOrderByStartTime" resultType="com.ptt.pttmanager.bean.Movie" resultMap="movieMapper" >
+        select * from movie where `status` = #{status} order by `start_time` desc
+    </select>
 
     <select id="queryMovieOrderBySource"  resultType="com.ptt.pttmanager.bean.Movie">
         SELECT * FROM  movie where `status`=1  ORDER BY star DESC
@@ -57,6 +55,26 @@
          WHERE t.status = 3
     </select>
 
+    <select id="queryMovieOfLessThanStartTimeAndStatus" resultType="com.ptt.pttmanager.bean.Movie" resultMap="movieMapper">
+        SELECT * FROM movie WHERE `status` = #{status} AND start_time &lt; #{date}
+    </select>
+
+    <select id="queryMovieOfGreaterThanOrEqualToStartTimeAndStatus" resultType="com.ptt.pttmanager.bean.Movie" resultMap="movieMapper">
+         SELECT * FROM movie WHERE `status` = #{status} AND start_time &gt;= #{date}
+    </select>
+
+
+
+
+
+    <!--insert插入方法-->
+    <insert id="add" parameterType="com.ptt.pttmanager.bean.Movie" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+        insert into movie
+        values (#{movieName},#{movieDirect},#{moviePerformer},#{movieType},#{movieArea},#{movieTime},#{movieDesc},#{movieImages},#{startTime},#{status},#{star},#{language},#{salesVolume})
+    </insert>
+
+
+   <!--update方法-->
     <update id="updateSalesVolumeByMovieId">
         UPDATE `movie` SET  sales_volume = #{count} WHERE id = #{movieId}
     </update>

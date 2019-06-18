@@ -1,0 +1,29 @@
+server:
+  port: 7002
+
+spring:
+  application:
+    name: ptt-zuul-01
+
+eureka:
+  instance:
+    instance-id:  ptt-zuul-7002
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://eureka7001.ptt.com:7001/eureka
+
+
+zuul:
+  routes:
+    mymanage.serviceId: ptt-manager-provider
+    mymanage.path: /ptt/** #（虚拟的服务名称）
+  ignored-services: "*"   # 禁用所有的真实微服务名称
+#  prefix: /ptt
+
+# 配置点开服务的info信息
+info:
+  app.name: ptt-zuul-01
+  comany.name: com.ptt
+  build.artifactId: ptt-zuul-7002
+  build.version: 1.0-SNAPSHOT

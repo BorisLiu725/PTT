@@ -1,9 +1,11 @@
 package com.ptt.pttorder.config;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +27,11 @@ public class WebConfig {
     }
 
 
-//    @Bean
-//    @LoadBalanced
-//    public RestTemplate getRestTemplate(){
-//        return new RestTemplate();
-//    }
+    @Bean
+    @LoadBalanced //默认采用轮循的方式
+    public RestTemplate getRestTemplate(){
+        return new RestTemplate();
+    }
 
     @Bean
     public Executor taskExecutor(){

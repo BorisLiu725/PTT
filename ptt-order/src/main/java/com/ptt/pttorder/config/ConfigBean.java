@@ -12,4 +12,6 @@ public class ConfigBean {
     public RestTemplate getRestTemplate(){
         return new RestTemplate();
     }
+
+
 }

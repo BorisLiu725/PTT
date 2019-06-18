@@ -1,11 +1,10 @@
 package com.ptt.pttmanager.controller;
 
 import com.ptt.pttmanager.bean.Ticket;
-import com.ptt.pttmanager.service.TicketService;
+import com.ptt.pttmanager.service.impl.TicketService;
 import com.ptt.pttmanager.utils.PageResult;
 import com.ptt.pttmanager.utils.ResultMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -88,13 +87,13 @@ public class TicketController {
 //   }
 
 
-    @PostMapping("/update")
+    @PostMapping("/update/unlock")
     @ResponseBody
     public ResultMessage updateTicketsStatus(@RequestBody List<String> tickets){
         System.out.println(tickets);
         ResultMessage resultMessage = new ResultMessage();
         try{
-            Boolean bool = this.ticketService.updateTicketsStatus(tickets);
+            Boolean bool = this.ticketService.updateTicketsStatusToNotSale(tickets);
             if (bool){
                 resultMessage.setMsg("解锁成功..");
                 resultMessage.setCode("1");

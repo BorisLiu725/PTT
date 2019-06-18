@@ -2,16 +2,14 @@ package com.ptt.pttmanager.controller;
 
 import com.ptt.pttmanager.bean.ResultSchedule;
 import com.ptt.pttmanager.bean.Schedule;
-import com.ptt.pttmanager.service.ScheduleService;
+import com.ptt.pttmanager.service.impl.ScheduleService;
 import com.ptt.pttmanager.utils.PageResult;
-import com.ptt.pttmanager.utils.ScheduleResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @Controller

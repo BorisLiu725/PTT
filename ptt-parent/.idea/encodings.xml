@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/../ptt-config-client-7004" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../ptt-eureka-7001" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../ptt-github-config-7003" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../ptt-hystrix-dashboard" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../ptt-hystrix-dashboard-7005" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../ptt-manage" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../ptt-order" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../ptt-search" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/../ptt-sso" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/../ptt-zuul-7002" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

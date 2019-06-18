@@ -6,20 +6,30 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ptt-config-client-7004" />
         <module name="ptt-eureka-7001" />
+        <module name="ptt-github-config-7003" />
+        <module name="ptt-hystrix-dashboard" />
+        <module name="ptt-hystrix-dashboard-7005" />
         <module name="ptt-manage" />
         <module name="ptt-order" />
         <module name="ptt-search" />
         <module name="ptt-sso" />
+        <module name="ptt-zuul-7002" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="ptt-config-client-7004" target="1.8" />
       <module name="ptt-eureka-7001" target="1.8" />
+      <module name="ptt-github-config-7003" target="1.8" />
+      <module name="ptt-hystrix-dashboard" target="1.8" />
+      <module name="ptt-hystrix-dashboard-7005" target="1.8" />
       <module name="ptt-manage" target="1.8" />
       <module name="ptt-order" target="1.8" />
       <module name="ptt-parent" target="1.8" />
       <module name="ptt-search" target="1.8" />
       <module name="ptt-sso" target="1.8" />
+      <module name="ptt-zuul-7002" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
